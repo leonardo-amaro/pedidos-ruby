@@ -7,6 +7,7 @@ cardapio = [
   {id: 6, sabor: "Banana & Nutella", valor: 25}
 ]
 opcao_usuario = ""
+lista_pedidos = []
 
 def mostrar_menu
   puts "PEDIDOS RUBY".center(41, "_")
@@ -16,13 +17,32 @@ def mostrar_menu
 
   1 - Exibir o cardápio
   2 - Fazer pedido
-  3 - Sair"
+  3 - Pagar pelo pedido
+  4 - Sair"
 end
 
 def mostrar_cardapio(c)
-  puts "CARDÁPIO".center(33, "_")
+  puts "CARDÁPIO".center(34, "_")
   c.each do |pizza|
     puts "%d. %-20s | R$ %0.2f" % [pizza[:id], pizza[:sabor], pizza[:valor]]
+  end
+end
+
+def fazer_pedido(c, l)
+  opt = "s"
+  while opt == "s"
+    puts "> Digite o cód. da pizza desejada:"
+    cod_pedido = gets.chomp
+    puts "> Seu pedido: Pizza de #{c[cod_pedido.to_i - 1][:sabor]}"
+    l.push(c[cod_pedido.to_i - 1])
+    puts "> Adicionar um ítem ao pedido? (s/n)"
+    opt = gets.chomp
+  end
+end
+
+def pagar_pedido(l)
+  l.each do |pizza|
+    puts pizza[:valor]
   end
 end
 
@@ -36,10 +56,11 @@ while true
     puts "> Pressione ENTER para voltar ao menu."
     gets.chomp
   when "2"
-    puts "Digite o cód. da pizza desejada:"
-    cod_pedido = gets.chomp
-    puts "Seu pedido: #{cardapio[cod_pedido.to_i - 1]}"
+    fazer_pedido(cardapio, lista_pedidos)
   when "3"
+    pagar_pedido(lista_pedidos)
+    break
+  when "4"
     break
   else
     puts "> Opção inválida! Voltando para o menu..."
