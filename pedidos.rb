@@ -6,6 +6,7 @@ cardapio = [
     {sabor: "Brócolis & Queijo", valor: 35},
     {sabor: "Banana & Nutella", valor: 25}
 ]
+opcao_usuario = ""
 
 def mostrar_cardapio(c)
     c.each do |pizza|
@@ -13,4 +14,9 @@ def mostrar_cardapio(c)
     end
 end
 
-mostrar_cardapio(cardapio)
+while opcao_usuario != "n"
+  puts "CARDÁPIO".center(31, "_")
+  mostrar_cardapio(cardapio)
+  puts "> Deseja ver novamente? (s/n)"
+  opcao_usuario = gets.chomp
+end
