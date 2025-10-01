@@ -1,10 +1,10 @@
 cardapio = [
-  {sabor: "Mussarela", valor: 35},
-  {sabor: "Calabresa", valor: 25},
-  {sabor: "Frango & Catupiry", valor: 35},
-  {sabor: "Portuguesa", valor: 25},
-  {sabor: "Brócolis & Queijo", valor: 35},
-  {sabor: "Banana & Nutella", valor: 25}
+  {id: 1, sabor: "Mussarela", valor: 35},
+  {id: 2, sabor: "Calabresa", valor: 25},
+  {id: 3, sabor: "Frango & Catupiry", valor: 35},
+  {id: 4, sabor: "Portuguesa", valor: 25},
+  {id: 5, sabor: "Brócolis & Queijo", valor: 35},
+  {id: 6, sabor: "Banana & Nutella", valor: 25}
 ]
 opcao_usuario = ""
 
@@ -20,9 +20,9 @@ def mostrar_menu
 end
 
 def mostrar_cardapio(c)
-  puts "CARDÁPIO".center(31, "_")
+  puts "CARDÁPIO".center(33, "_")
   c.each do |pizza|
-    puts "%-20s | R$ %0.2f" % [pizza[:sabor], pizza[:valor]]
+    puts "%d. %-20s | R$ %0.2f" % [pizza[:id], pizza[:sabor], pizza[:valor]]
   end
 end
 
@@ -35,6 +35,10 @@ while true
     mostrar_cardapio(cardapio)
     puts "> Pressione ENTER para voltar ao menu."
     gets.chomp
+  when "2"
+    puts "Digite o cód. da pizza desejada:"
+    cod_pedido = gets.chomp
+    puts "Seu pedido: #{cardapio[cod_pedido.to_i - 1]}"
   when "3"
     break
   else
