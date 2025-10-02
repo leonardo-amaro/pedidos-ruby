@@ -41,9 +41,11 @@ def fazer_pedido(c, l)
 end
 
 def pagar_pedido(l)
+  valor_total = 0
   l.each do |pizza|
-    puts pizza[:valor]
+    valor_total += pizza[:valor]
   end
+  return valor_total
 end
 
 while true
@@ -58,7 +60,7 @@ while true
   when "2"
     fazer_pedido(cardapio, lista_pedidos)
   when "3"
-    pagar_pedido(lista_pedidos)
+    puts "> O total a pagar é de R$ %0.2f" % [pagar_pedido(lista_pedidos)]
     break
   when "4"
     break
@@ -66,3 +68,5 @@ while true
     puts "> Opção inválida! Voltando para o menu..."
   end
 end
+
+puts "> Obrigado pela preferência!"
